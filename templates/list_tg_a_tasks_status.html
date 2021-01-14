@@ -4,7 +4,7 @@
 
 <br><h2>DDV-TG-Attacker Tasks Status</h2><br>
   {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
-    <table>
+    <table id="table1">
         <tr>
             {% for col in column_names %}
             <th>{{col}}</th>

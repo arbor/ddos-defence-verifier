@@ -445,7 +445,10 @@ def agent_lookup(uuid):
 def remote_agent_enroll_push():
     agent_list_df = get_agents()
     error = None
-    agent_names = agent_list_df.agent_hostname
+    try:
+        agent_names = agent_list_df.agent_hostname
+    except:
+        return redirect(url_for('enroll_agents'))
     if request.method == 'POST':
         uuid = agent_list_df[agent_list_df['agent_hostname'] == request.form['agent_hostname']].index.values[0]
     if request.method == 'GET':
@@ -490,8 +493,10 @@ def remote_tg_v_task_push():
     agent_entries = get_agents()
     error = None
     if request.method == 'POST':
-        #uuid = tg_v_tasks_entries[tg_v_tasks_entries['tg_v_eut'] == request.form['tg_v_eut']].index.values[0]
-        uuid = int(request.form['tg_v_enrollment_id'])
+        try:
+            uuid = int(request.form['tg_v_enrollment_id'])
+        except:
+            return redirect(url_for('enroll_tg_v_tasks'))
     if request.method == 'GET':
         try: #Landing directly in push page, with GET, results in no uuid, hence needs exception
             uuid = int(request.args.get('push_tg_v_task_uuid'))
@@ -575,7 +580,10 @@ def remote_tg_a_task_push():
     agent_entries = get_agents()
     error = None
     if request.method == 'POST':
-        uuid = int(request.form['tg_a_enrollment_id'])
+        try:
+            uuid = int(request.form['tg_a_enrollment_id'])
+        except:
+            return redirect(url_for('enroll_tg_a_tasks'))
     if request.method == 'GET':
         try: #Landing directly in push page, with GET, results in no uuid, hence needs exception
             uuid = int(request.args.get('push_tg_a_task_uuid'))
@@ -906,7 +914,10 @@ def delete_vps_agents(vps_uuids):
 def delete_agents():
     error = None
     agent_entries = get_agents()
-    agent_names = agent_entries.agent_hostname
+    try:
+        agent_names = agent_entries.agent_hostname
+    except:
+        return redirect(url_for('enroll_agents'))
     if request.method == 'GET':
         try:
             uuid = int(request.args.get('delete_agent_uuid')) # https://127.0.0.1:2020/delete_agents?delete_agent_uuid=1594133309
@@ -1159,7 +1170,10 @@ def delete_tg_v_task():
                     data=tg_v_task_entries.to_html())
     if request.method == 'POST':
         #uuid = tg_v_task_entries[tg_v_task_entries['tg_v_eut'] == request.form['tg_v_eut']].index.values[0]
-        uuid = int(request.form['tg_v_enrollment_id'])
+        try:
+            uuid = int(request.form['tg_v_enrollment_id'])
+        except:
+            return redirect(url_for('enroll_tg_v_tasks'))
         delete_tg_v_task_entry(uuid)
         # get fresh task list after the delete
         tg_v_task_entries = get_tg_v_tasks()
@@ -1527,7 +1541,10 @@ def delete_tg_a_task():
                                 tg_a_names=tg_a_names,
                                 data=tg_a_task_entries.to_html())
     if request.method == 'POST':
-        uuid = int(request.form['tg_a_enrollment_id'])
+        try:
+            uuid = int(request.form['tg_a_enrollment_id'])
+        except:
+            return redirect(url_for('enroll_tg_a_tasks'))
         delete_tg_a_task_entry(uuid)
         # get fresh task list after the delete
         tg_a_task_entries = get_tg_a_tasks()
@@ -1898,6 +1915,14 @@ def eut_status():
             eut_companyname = str(eut_entries[eut_entries.index == int(uuid)]['eut_companyname'].values[0])
             eut_companyname_id = str(eut_entries[eut_entries.index == int(uuid)]['eut_companyname_id'].values[0])
             eut_enrollment_date = str(eut_entries[eut_entries.index == int(uuid)]['eut_enrollment_date'].values[0])
+            try:
+                eut_a_tasks_cnt = len(tg_a_task_entries[tg_a_task_entries['tg_a_eut_id'] == uuid].index.values)
+            except:
+                eut_a_tasks_cnt = 0
+            try:
+                eut_v_tasks_cnt = len(tg_v_task_entries[tg_v_task_entries['tg_v_eut_id'] == uuid].index.values)
+            except:
+                eut_v_tasks_cnt = 0
             eut_status_entry = {
                             #'eut_enrollment_id': eut_enrollment_id,
                             'eut_shortname': eut_shortname,
@@ -1905,8 +1930,8 @@ def eut_status():
                             'eut_companyname': eut_companyname,
                             'eut_companyname_id': eut_companyname_id,
                             'eut_enrollment_date': eut_enrollment_date,
-                            'eut_a_tasks': len(tg_a_task_entries[tg_a_task_entries['tg_a_eut_id'] == uuid].index.values),
-                            'eut_v_tasks': len(tg_v_task_entries[tg_v_task_entries['tg_v_eut_id'] == uuid].index.values),
+                            'eut_a_tasks': eut_a_tasks_cnt,
+                            'eut_v_tasks': eut_v_tasks_cnt,
                             'edit': eut_enrollment_id,
                             'delete': eut_enrollment_id
                            }
@@ -2236,7 +2261,7 @@ def run_ddv_tg_v_tasks(uuid, euts_of_out): # uuid is out_uuid
             url = 'https://' + str(tg_v_host_ip) + ':' + str(tg_v_host_port) + '/ddv_tg_v_task_run/' + str(tg_v_task_id) + '/status'
             #print url
             try:
-                task_resp = requests.get(url, verify=False, timeout=ddv_c_cfg.agent_timeout)
+                task_resp = requests.get(url, verify=False)
                 #pp.pprint(task_resp)
                 if task_resp.ok:
                     #print task_resp.json()
@@ -2246,7 +2271,7 @@ def run_ddv_tg_v_tasks(uuid, euts_of_out): # uuid is out_uuid
                         stream_logger(message)
                         url = 'https://' + str(tg_v_host_ip) + ':' + str(tg_v_host_port) + '/ddv_tg_v_task_run/' + str(tg_v_task_id) + '/start'
                         #print url
-                        task_resp = requests.get(url, verify=False, timeout=ddv_c_cfg.agent_timeout)
+                        task_resp = requests.get(url, verify=False)
                         #print(str(tg_v_haost_ip) + ' - ' + str(tg_v_task_id) + ': ' + str(task_resp.json()))
                         message = str(datetime.now().strftime("%H:%M:%S")) + ' ' + '.... ' + str(task_resp.json().get('message'))
                         flash(message, 'flash_green')
@@ -2257,7 +2282,7 @@ def run_ddv_tg_v_tasks(uuid, euts_of_out): # uuid is out_uuid
                         # get the metric result when the task has completed
                         result_url = 'https://' + str(tg_v_host_ip) + ':' + str(tg_v_host_port) + '/ddv_tg_v_task_run/' + str(tg_v_task_id) + '/result'
                         #print url
-                        task_resp = requests.get(result_url, verify=False, timeout=ddv_c_cfg.agent_timeout)
+                        task_resp = requests.get(result_url, verify=False)
                         #print(str(tg_v_haost_ip) + ' - ' + str(tg_v_task_id) + ': ' + str(task_resp.json()))
                         message = str(datetime.now().strftime("%H:%M:%S")) + ' ' + '........ ' + str(task_resp.json().get('message'))
                         flash(message, 'flash_green')
@@ -2289,7 +2314,10 @@ def run_out(): # run all attack and verifier tasks linked to organistation uuid
         stream_logger('DDV-C_SL: Please wait a few minutes while we run the DDoS Defense Verification Tests...')
         uuid = request.form['out_companyname']
         run_type = request.form['run_type']
-        euts_of_out = eut_entries[eut_entries['eut_companyname_id'] == str(uuid)] #get all eut under out
+        try:
+            euts_of_out = eut_entries[eut_entries['eut_companyname_id'] == str(uuid)] #get all eut under out
+        except:
+            return redirect(url_for('enroll_out'))
         if run_type == 'F': # Run the full set of tests
             stream_logger_clear()
             run_ddv_tg_v_tasks(uuid, euts_of_out)
@@ -2338,7 +2366,11 @@ def sl_config_out(): # verify all attack and verifier tasks linked to organistat
     if request.method == 'POST':
         uuid = request.form['out_companyname']
         action = request.form['action']
-        eut_list = eut_entries[eut_entries['eut_companyname_id'] == str(uuid)] #get all eut under out
+        try:
+            eut_list = eut_entries[eut_entries['eut_companyname_id'] == str(uuid)] #get all eut under out
+        except:
+            error = 'DDV-C: No EuT found.  Please create an EuT and try again.'
+            return render_template('sl_config_out.html', error=error, out_names=out_names, data=out_entries.to_html())
         message = str(datetime.now().strftime("%H:%M:%S")) + ' ' + 'DDV-C_SL: Verifying if base configs are on ' + str(out_entries[out_entries.index == int(uuid)]['out_companyname'].values[0]) + ' Sightline'
         flash(message, 'flash_blue')
         stream_logger(message)

@@ -64,7 +64,16 @@ table           {
                 font-family: arial, sans-serif;
                 font-size: 0.9em;
                 border-collapse: collapse;
-                width: 90%;
+                width: 100%;
+                }
+
+#table1         {
+                font-size: 0.7em;
+                width: 100%;
+                }
+
+#table2         {
+                border-collapse: collapse;
                 }
 
 td, th          {

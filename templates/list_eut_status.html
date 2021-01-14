@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block body %}
+{% if session.logged_in %}
+
+<br><h2>Entities Under Test Status</h2><br>
+  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+    <table>
+        <tr>
+            {% for col in column_names %}
+            <th>{{col}}</th>
+            {% endfor %}
+        </tr>
+        {% for row in row_data %}
+        <tr>
+            {% for col, row_ in zip(column_names, row) %}
+                {% if col == edit_link_column %}
+                <td>
+                    <button type="submit" value={{ row_ }} name="edit_eut_uuid" form="edit_uuid_button" class="eut_uuid_button">
+                        {{ "edit" }}
+                    </button>
+                </td>
+                {% elif col == delete_link_column %}
+                <td>
+                    <button type="submit" value={{ row_ }} name="delete_eut_uuid" form="delete_uuid_button" class="eut_uuid_button">
+                        {{ "delete" }}
+                    </button>
+                </td>
+                {% else %}
+                <td>{{ row_ }}</td>
+                {% endif %}
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    <form action="/edit_eut" method="get" id="edit_uuid_button"></form>
+    <form action="/delete_eut" method="get" id="delete_uuid_button"></form>
+{% endif %}
+{% endblock %}

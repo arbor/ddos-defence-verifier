@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block body %}
+{% if session.logged_in %}
+<html>
+
+    <head>
+        <br><h2>Entities Under Test</h2><br>
+    </head>
+    <body>
+    {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+        <form action="{{ url_for('enroll_eut') }}" method=post>
+            <table style="width:25%">
+                <tr>
+                    <td>Shortname:</td>
+                    <td><input type=text name=eut_shortname required></td>
+                </tr>
+                <tr>
+                    <td>IP Address:</td>
+                    <td><input type=text name=eut_dst_ip required pattern="((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$"></td>
+                </tr>
+                <tr>
+                    <td><label for="eut">Company Name:</label></td>
+                    <td><select name="out_companyname_id" id="out_companyname_id" required>
+                          <option value="">Select Organisation</option>
+                            {% if out_companynames | length > 0 %}
+                                {% for out_companyname in out_companynames %}
+                                    <option value = {{ out_companyname['out_enrollment_id'] }}>{{ out_companyname['out_companyname'] }}</option>
+                                {% endfor %}
+                            {% endif %}
+                      <dd></select></td>
+                </tr>
+            </table>
+            <br><td><input type=submit value=submit></td><br>
+        </form>
+    <div class=dfdata>
+        {{ data|safe }}
+    </div>
+    {% endif %}
+    {% endblock %}
+    </body>
+</html>

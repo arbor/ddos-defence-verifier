@@ -1,0 +1,148 @@
+body            {   font-family:
+                    sans-serif;
+                    background: #eee;
+                }
+a, h1, h2       { color: #4c8226; }
+h1, h2          { font-family: 'Arial', serif; margin: 0; }
+h1              { border-bottom: 2px solid #eee; }
+h2              { font-size: 1.5em; }
+
+.page           {   margin: 2em auto;
+                    width: 90%;
+                    border: 5px
+                    solid #ccc;
+                    padding: 0.8em;
+                    background: white;
+                }
+.entries        { list-style: none; margin: 0; padding: 0; }
+.entries li     { margin: 0.8em 1.2em; text-align: center;}
+.entries li h2  { font-size: 0.8em; margin-left: -1em; text-align: left; }
+.add-entry      { font-size: 0.9em; border-bottom: 1px solid #ccc; }
+.add-entry dl   { font-weight: bold; }
+.dfdata         {   text-align: left;
+                    font-size: 0.9em;
+                    padding: 0.3em;
+                    margin-bottom: 1em;
+                    background: #fafafa;
+                }
+.metanav        {   text-align: right;
+                    font-size: 1.5em;
+                    padding: 0.3em;
+                    margin-bottom: 1em;
+                    background: #fafafa;
+                }
+.metanav1       {   text-align: center;
+                    font-size: 1.5em;
+                    padding: 0.3em;
+                    margin-bottom: 1em;
+                    background: #fafafa;
+                }
+.metanav2       {   text-align: center;
+                    font-size: 2em;
+                    padding: 0.3em;
+                    margin-bottom: 1em;
+                    background: #fafafa;
+                }
+.metanav3       {   text-align: center;
+                    display: -moz-inline-box;
+                    font-size: 2em;
+                    padding: 0.3em;
+                    margin-bottom: 1em;
+                    background: #fafafa;
+                }
+.flash_blue     { background: #142C3D; padding: 0.5em;
+                  border: 1px solid #aacbe2; color: white;}
+.flash_green    { background: #4c8226; padding: 0.5em;
+                  border: 1px solid #aacbe2; color: white;}
+.flash_orange   { background: #ebad67; padding: 0.5em;
+                  border: 1px solid #aacbe2; color: white;}
+.flash_red      { background: #b62c1a; padding: 0.5em;
+                  border: 1px solid #aacbe2; color: white;}
+.error          { background: #b62c1a; padding: 0.5em; color: white;}
+
+table           {
+                font-family: arial, sans-serif;
+                font-size: 0.9em;
+                border-collapse: collapse;
+                width: 90%;
+                }
+
+td, th          {
+                border: 1px solid #dddddd;
+                font-size: 1em;
+                text-align: left;
+                padding: 10px;
+                }
+
+tr:nth-child(even) {
+                    background-color: #dddddd;
+                    }
+/* Navbar container */
+.navbar         {
+                overflow: hidden;
+                background-color: #142C3D;
+                font-family: Arial;
+                }
+
+/* Links inside the navbar */
+.navbar a       {
+                float: left;
+                font-size: 16px;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                }
+
+/* The dropdown container */
+.dropdown       {
+                float: left;
+                overflow: hidden;
+                }
+
+/* Dropdown button */
+.dropdown .dropbtn {
+                font-size: 16px;
+                border: none;
+                outline: none;
+                color: white;
+                padding: 14px 16px;
+                background-color: inherit;
+                font-family: inherit; /* Important for vertical align on mobile phones */
+                margin: 0; /* Important for vertical align on mobile phones */
+                }
+
+/* Add a background color to navbar links on hover */
+.navbar a:hover, .dropdown:hover .dropbtn {
+                background-color: #4c8226;
+                }
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #4c8226;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+                }
+
+/* Links inside the dropdown */
+.dropdown-content a {
+                float: none;
+                color: white;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+                text-align: left;
+                }
+
+/* Add a background color to dropdown links on hover */
+.dropdown-content a:hover {
+                background-color: #3f6325;
+                }
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+                display: block;
+                }

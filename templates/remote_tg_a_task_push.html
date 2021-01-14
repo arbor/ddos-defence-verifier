@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block body %}
+{% if session.logged_in %}
+
+<br><h2>DDV-TG-Attacker Tasks</h2><br>
+  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+  <form action="{{ url_for('remote_tg_a_task_push') }}" method=post>
+    <dl>
+      <dt><label for="tg_a_task">Push Task:</label>
+        <select name="tg_a_enrollment_id" id="tg_a_eut">
+          <option value="">Select Task</option>
+          {% if tg_a_names | length > 0 %}
+            {% for tg_a_name in tg_a_names %}
+              <option value = {{ tg_a_name['tg_a_enrollment_id'] }}>{{ tg_a_name['tg_a_eut'] }} </option>
+            }
+          {% endfor %}
+          {% endif %}
+      <dd></select>
+      <br><dt><input type=submit value=push><br>
+    </dl>
+  </form>
+<div class=dfdata>
+{{ data|safe }}
+</div>
+{% endif %}
+{% endblock %}

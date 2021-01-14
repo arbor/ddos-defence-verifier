@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block body %}
+{% if session.logged_in %}
+
+<br><h2>Delete Organisation Under Test</h2><br>
+  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+  <form action="{{ url_for('delete_out') }}" method=post>
+    <dl>
+      <dt><label for="out">Delete Organisation:</label>
+        <select name="out_companyname" id="out_companyname">
+          <option value="">Select Organisation</option>
+          {% if out_names | length > 0 %}
+            {% for out_name in out_names %}
+              <option value = {{ out_name['out_enrollment_id'] }}>{{ out_name['out_companyname'] }} </option>
+            }
+          {% endfor %}
+          {% endif %}
+      <dd></select>
+      <br><dt><input type=submit value=delete><br>
+    </dl>
+  </form>
+<div class=dfdata>
+{{ data|safe }}
+</div>
+{% endif %}
+{% endblock %}

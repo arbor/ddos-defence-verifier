@@ -1,0 +1,16 @@
+<!doctype html>
+<head>
+    <title>DDV-C Live Data Stream Output</title>
+</head>
+<body>
+    <div>
+        <iframe
+            frameborder="0"
+            scroll="auto"
+            noresize="noresize"
+            style='background: transparent; width: 100%; height:1000px;'
+            src="{{ url_for('stream_content')}}"
+            >
+        </iframe>
+    </div>
+</body>

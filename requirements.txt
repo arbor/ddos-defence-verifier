@@ -1,0 +1,10 @@
+# sudo pip3 install -r requirements.txt
+requests
+flask
+pandas
+networkx
+pyopenssl
+plotly
+paramiko
+scp
+numpy

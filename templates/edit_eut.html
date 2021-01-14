@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block body %}
+{% if session.logged_in %}
+<html>
+ 
+    <head>
+        <br><h2>Edit Entity Under Test</h2><br>
+    </head>
+    <body>
+        {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+            <form action="{{ url_for('edit_eut') }}" method=post>
+                <table style="width:25%">
+                    <tr>
+                        <td>Unique ID:</td>
+                        <td><input type=text name=eut_enrollment_id value={{ eut[0]['eut_enrollment_id'] }} readonly size=40></td>
+                    </tr>
+                    <tr>
+                        <td>Enrollment Date:</td>
+                        <td><input type=text name=eut_enrollment_date value='{{ eut[0]['eut_enrollment_date']|safe }}' readonly size=40></td>
+                    </tr>
+                    <tr>
+                        <td>Companyname:</td>
+                        <td><input type=text name=eut_companyname value='{{ eut[0]['eut_companyname'] }}' readonly size=40></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type=hidden name=eut_companyname_id value='{{ eut[0]['eut_companyname_id'] }}' readonly size=40></td>
+                    </tr>
+                    <tr>
+                        <td>Shortname:</td>
+                        <td><input type=text name=eut_shortname value='{{ eut[0]['eut_shortname'] }}' required size=40></td>
+                    </tr>
+                    <tr>
+                        <td>IP:</td>
+                        <td><input type=text name=eut_dst_ip value='{{ eut[0]['eut_dst_ip'] }}' required pattern="((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$" size=40></td>
+                    </tr>
+                </table>
+                <br><td><input type=submit value=submit></td><br>
+            </form>
+        <div class=dfdata>
+        {{ data|safe }}
+        </div>
+        {% endif %}
+        {% endblock %}
+    </body>
+</html>

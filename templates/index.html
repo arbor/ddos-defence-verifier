@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<br><h2 class="title">
+    DDoS Defence Verifier
+</h2><br>
+{% if not session.logged_in %}
+<br><h3 class="subtitle">
+        Please <a href="{{ url_for('login') }}">Login</a> to Continue
+    </h3><br>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block body %}
+{% if session.logged_in %}
+<html>
+
+    <head>
+        <br><h2>Edit Organisation Under Test</h2><br>
+    </head>
+    <body>
+        {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+            <form action="{{ url_for('edit_out') }}" method=post>
+                <table style="width:30%">
+                    <tr>
+                      <td>Unique ID:</td>
+                      <td><input type=text name=out_enrollment_id value={{ out[0]['out_enrollment_id'] }} readonly size=40></td>
+                    </tr>
+                    <tr>
+                      <td>Enrollment Date:</td>
+                      <td><input type=text name=out_enrollment_date value='{{ out[0]['out_enrollment_date']|safe }}' readonly size=40></td>
+                    </tr>
+                    <tr>
+                      <td>Company Name:</td>
+                      <td><input type=text name=out_companyname value='{{ out[0]['out_companyname'] }}' readonly size=40></td>
+                    </tr>
+                    <tr>
+                      <td>Contact Name:</td>
+                      <td><input type=text name=out_contactname value='{{ out[0]['out_contactname'] }}' size=40></td>
+                    </tr>
+                    <tr>
+                      <td>Contact Email:</td>
+                      <td><input type=text name=out_contactemail value='{{ out[0]['out_contactemail'] }}' size=40></td>
+                    </tr>
+                    <tr>
+                      <td>Contact Number:</td>
+                      <td><input type=text name=out_contactnumber value='{{ out[0]['out_contactnumber'] }}' size=40></td>
+                    </tr>
+                    <tr>
+                      <td>Industry:</td>
+                      <td><input type=text name=out_industry value='{{ out[0]['out_industry'] }}' size=40></td>
+                    </tr>
+                    <tr>
+                      <td>Sightline URL:</td>
+                      <td><input type=text name=out_sl_ip value='{{ out[0]['out_sl_ip'] }}' size=40></td>
+                    </tr>
+                    <tr>
+                      <td>Sightline API Key:</td>
+                      <td><input type=text name=out_sl_api value='{{ out[0]['out_sl_api'] }}' size=40></td>
+                    </tr>
+                </table>
+                <br><td><input type=submit value=submit></td><br>
+            </form>
+            <div class=dfdata>
+            {{ data|safe }}
+            </div>
+        {% endif %}
+        {% endblock %}
+    </body>
+</html>

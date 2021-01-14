@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block body %}
+{% if session.logged_in %}
+
+<br><h2>DDV-TG Agent Template/Default Settings</h2><br>
+  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+<form action="/ddv_tg_settings" method="post">
+    <table>
+        <tr>
+            <th><h3>Key</h3></th>
+            <th><h3>Value</h3></th>
+            <th><h3>Description</h3></th>
+        </tr>
+        {% for key, value in data %}
+            <tr>
+                <td> {{ key }} <input name=Key value="{{ key }}" type=hidden readonly> </td>
+                {% if 'ddv_c_ip' in key %}
+                    <td> <input name=Value value="'{{ my_public_ip }}'" type=text required> </td>
+                {% elif 'my_ip' in key %}
+                    <td> <input name=Value value="{{ value[0] }}" type=text required readonly> </td>
+                {% elif "'" in value[0] %}
+                    <td> <input name=Value value="{{ value[0] }}" type=text required> </td>
+                {% elif value[0] == 'True'%}
+                    <td>
+                    <select name=Value value="{{ value[0] }}" required>
+                        <option value="True">Enabled</option>
+                        <option value="False">Disabled</option>
+                    </select>
+                    </td>
+                {% elif value[0] == 'False' %}
+                    <td>
+                    <select name=Value value="{{ value[0] }}" required>
+                        <option value="False">Disabled</option>
+                        <option value="True">Enabled</option>
+                    </select>
+                    </td>
+                {% elif value[0] | int in range (-10000,10000) %}
+                    <td> <input name=Value value="{{ value[0] }}" type=number required> </td>
+                {% else %}
+                    <td> <input name=Value value="{{ value[0] }}" type=text required> </td>
+                {% endif %}
+                <td> <input name=Description value="{{ value[1] }}" type=text size=120 required readonly> </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br><button type="submit">Save</button><br>
+  </form>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,98 @@
+<!doctype html>
+<title>DDV-Console</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+<div class=page>
+    <div class="navbar">
+      <a href="/">Home</a>
+      {% if session.logged_in %}
+      <div class="dropdown">
+        <button class="dropbtn">OuT
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <u><a href="{{ url_for('out_status') }}">Organisation Under Test</a></u>
+            <a href="{{ url_for('out_status') }}">> Status</a>
+            <a href="{{ url_for('enroll_out') }}">> New</a>
+            <a href="{{ url_for('delete_out') }}">> Delete</a>
+            <a href="{{ url_for('sl_config_out') }}">> SL-Config</a>
+            <a href="{{ url_for('run_out') }}">> Run</a>
+        </div>
+      </div>
+      
+      <div class="dropdown">
+        <button class="dropbtn">EuT
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <u><a href="{{ url_for('eut_status') }}">Entity Under Test</a></u>
+            <a href="{{ url_for('eut_status') }}">> Status</a>
+            <a href="{{ url_for('enroll_eut') }}">> New</a>
+            <a href="{{ url_for('delete_eut') }}">> Delete</a>
+        </div>
+      </div>
+      
+      <div class="dropdown">
+        <button class="dropbtn">TG-Agents
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <u><a href="{{ url_for('agents_status') }}">Traffic Generator Agents</a></u>
+            <a href="{{ url_for('agents_status') }}">> Status</a>
+            <a href="{{ url_for('enroll_agents') }}">> New</a>
+            <a href="{{ url_for('delete_agents') }}">> Delete</a>
+            <a href="{{ url_for('manage_vps_agents') }}">> VPS</a>
+            <a href="{{ url_for('remote_agent_enroll_push') }}">> Push</a>
+        </div>
+      </div>
+      
+      <div class="dropdown">
+        <button class="dropbtn">Attack-Tasks
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="{{ url_for('tg_a_tasks_status') }}">> Status</a>
+            <a href="{{ url_for('enroll_tg_a_tasks') }}">> New</a>
+            <a href="{{ url_for('delete_tg_a_task') }}">> Delete</a>
+            <a href="{{ url_for('remote_tg_a_task_push') }}">> Push</a>
+        </div>
+      </div>
+      
+      <div class="dropdown">
+        <button class="dropbtn">Verifier-Tasks
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="{{ url_for('tg_v_tasks_status') }}">> Status</a>
+            <a href="{{ url_for('enroll_tg_v_tasks') }}">> New</a>
+            <a href="{{ url_for('delete_tg_v_task') }}">> Delete</a>
+            <a href="{{ url_for('remote_tg_v_task_push') }}">> Push</a>
+        </div>
+      </div>
+      
+      <div class="dropdown">
+        <button class="dropbtn">Administration
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="{{ url_for('ddv_c_settings') }}">> DDV-Console</a>
+            <a href="{{ url_for('ddv_tg_settings') }}">> DDV-TG</a>
+        </div>
+      </div>
+      
+      <a href="{{ url_for('logout') }}" style="float: right;">Logout</a>
+      {% elif not session.logged_in %}
+      <a href="{{ url_for('login') }}" style="float: right;">Login</a>
+      {% endif %}
+    </div>
+ 
+  {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+          {% for category, message in messages %}
+              <div class= {{ category }} >
+                  <span>{{ message }}</span>
+              </div>
+          {% endfor %}
+      {% endif %}
+  {% endwith %}
+  {% block body %}{% endblock %}
+</div>

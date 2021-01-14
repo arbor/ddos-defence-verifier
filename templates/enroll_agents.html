@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block body %}
+{% if session.logged_in %}
+<html>
+ 
+    <head>
+        <br><h2>Enroll DDV-TG-x Agents</h2><br>
+    </head>
+    <body>
+    {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+        <form action="{{ url_for('enroll_agents') }}" method=post>
+            <table style="width:25%">
+                <tr>
+                    <td>Hostname:</td>
+                    <td><input type=text name=agent_hostname required size=40></td>
+                </tr>
+                <tr>
+                    <td>IP:</td>
+                    <td><input type=text name=agent_ip required pattern="((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$" size=40></td>
+                </tr>
+                <tr>
+                    <td>Location:</td>
+                    <td><input type=text name=agent_location size=40></td>
+                </tr>
+                <tr>
+                    <td>Description:</td>
+                    <td><input type=text name=agent_description size=40></td>
+                </tr>
+                <tr>
+                    <td><label for="roles">Role:</label></td>
+                    <td><select name="agent_role" id="agent_role" required>
+                            <option value="">Select Role</option>
+                            <option value="A">Attacker</option>
+                            <option value="V">Verifier</option>
+                    </select></td>
+                </tr>
+                <tr>
+                    <td>Local_API_Key:</td>
+                    <td><input type=text name=agent_local_api_key size=40></td>
+                </tr>
+                <tr>
+                    <td>Remote_API_Key:</td>
+                    <td><input type=text name=agent_remote_api_key size=40></td>
+                </tr>
+            </table>
+            <br><td><input type=submit value=submit></td><br>
+        </form>
+    <div class=dfdata>
+        {{ data|safe }}
+    </div>
+    {% endif %}
+    {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+{% block body %}
+{% if session.logged_in %}
+
+<br><h2>Run Tests against the Organisation</h2><br>
+  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+  <form action="{{ url_for('run_out') }}" method=post>
+    <dl>
+        <dt><label for="out">Select Organisation:</label>
+         <select name="out_companyname" id="out_companyname" required>
+          <option value="">Select Organisation</option>
+          {% if out_names | length > 0 %}
+            {% for out_name in out_names %}
+              <option value = {{ out_name['out_enrollment_id'] }}>{{ out_name['out_companyname'] }} </option>
+            }
+          {% endfor %}
+          {% endif %}
+        <dd></select>
+        <dt><label for="status">Select Test Type:</label>
+         <select name="run_type" id="run_type" value='Test Type' required>
+          <option value="F">Full</option>
+          <option value="D">Deployment</option>
+          <option value="V">Verifier Only</option>
+          <option value="A">Attack Only</option>
+        <dd></select>
+        <br><dt><input type=submit value=run><br>
+    </dl>
+  </form>
+
+
+<html>
+<body>
+<section>
+    <div>
+        <section class="upper">
+            <ul>
+                <a href="#" id="button1" class="button1" onclick="displaylogs()">View Live Logs</a>
+            </ul>
+        </section>
+    </div>
+    <div>
+        <section class="lower">
+            <div class="loadForm" id = "loadForm">
+            </div>
+        </section>
+    </div>
+</section>
+
+ <form action="#" id="form_1" method="post" name="form_1" style="display:none">
+  <div class="nameDiv"  style="alignment-adjust:auto; margin-left:auto; margin-top:auto">
+      <div id="infoPopup">
+            <span>Status:</span>
+              <iframe
+                frameborder="0"
+                scroll="auto"
+                noresize="noresize"
+                style='background: transparent; width: 100%; height:1000px;'
+                src="{{ url_for('stream_content')}}"
+                >
+              </iframe>
+        </div>
+    </div>
+ </form>
+ 
+ <script type="text/javascript">
+ function displaylogs(){
+     document.getElementById("form_1").style.display = "block";
+ }
+ </script>
+ </body>
+ </html>
+
+{% endif %}
+{% endblock %}

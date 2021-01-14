@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block body %}
+{% if session.logged_in %}
+
+<br><h2>DDV-TG-x Agent Status</h2><br>
+  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+<div class=dfdata>
+{{ data|safe }}
+</div>
+{% endif %}
+{% endblock %}

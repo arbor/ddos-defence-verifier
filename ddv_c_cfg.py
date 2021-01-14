@@ -1,0 +1,13 @@
+my_ip = '0.0.0.0' # Listening IP for DDV Console
+ddv_c_web_port = 2020 # Listening TCP Port for DDV Console
+out_list_filename = 'ddv_out_list.csv' # Organisation under Test csv filename
+eut_list_filename = 'ddv_eut_list.csv' # Entity under Test csv filename
+agents_list_filename = 'ddv_tg_agent_list.csv' # Traffic Generator Agents csv filename
+tg_v_tasks_list_filename = 'ddv_tg_v_list.csv' # Verifier Tasks csv filename
+tg_a_tasks_list_filename = 'ddv_tg_a_list.csv' # Attack Tasks csv filename
+ddv_tg_v_port = 1980 # Verifier Traffic Generator TCP Port
+ddv_tg_a_port = 1981 # Attacker Traffic Generator TCP Port
+agent_timeout = 2 # Default timeout for TG agent to respond
+ddv_run_sl_check_delay = 300 # Delay between starting ddv-tg-a attack traffic and checking Sightline alert and mitigation data
+vps_use_vultr = True # Use VULTR Virtual Private Servers for TG infrastructure
+vps_apikey = '' # API KEY Configured under your www.vultr.com profile

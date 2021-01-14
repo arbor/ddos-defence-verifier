@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block body %}
+{% if session.logged_in %}
+
+<br><h2>Organisation Under Test Status</h2><br>
+
+  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+    <table>
+        <tr>
+            {% for col in column_names %}
+            <th>{{col}}</th>
+            {% endfor %}
+        </tr>
+        {% for row in row_data %}
+        <tr>
+            {% for col, row_ in zip(column_names, row) %}
+                {% if col == edit_link_column %}
+                <td>
+                    <button type="submit" value={{ row_ }} name="edit_out_uuid" form="edit_uuid_button" class="out_uuid_button">
+                        {{ "edit" }}
+                    </button>
+                </td>
+                {% elif col == delete_link_column %}
+                <td>
+                    <button type="submit" value={{ row_ }} name="delete_out_uuid" form="delete_uuid_button" class="out_uuid_button">
+                        {{ "delete" }}
+                    </button>
+                </td>
+                {% elif col == verify_link_column %}
+                <td>
+                    <button type="submit" value={{ row_ }} name="verify_out_uuid" form="verify_uuid_button" class="out_uuid_button">
+                        {{ "verify" }}
+                    </button>
+                </td>
+                {% elif col == run_link_column %}
+                <td>
+                    <button type="submit" value={{ row_ }} name="run_out_uuid" form="run_uuid_button" class="out_uuid_button">
+                        {{ "run" }}
+                    </button>
+                </td>
+                {% elif col == draw_link_column %}
+                <td>
+                    <button type="submit" value={{ row_ }} name="draw_out_uuid" form="draw_uuid_button" class="out_uuid_button">
+                        {{ "draw" }}
+                    </button>
+                </td>
+                {% else %}
+                <td>{{ row_ }}</td>
+                {% endif %}
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    <form action="/edit_out" method="get" id="edit_uuid_button"></form>
+    <form action="/delete_out" method="get" id="delete_uuid_button"></form>
+    <form action="/sl_config_out" method="get" id="verify_uuid_button"></form>
+    <form action="/run_out" method="get" id="run_uuid_button"></form>
+    <form action="/draw_out" method="get" id="draw_uuid_button"></form>
+{% endif %}
+{% endblock %}

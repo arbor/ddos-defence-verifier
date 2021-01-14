@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+{% block body %}
+{% if session.logged_in %}
+<html>
+ 
+    <head>
+        <br><h2>Edit DDV-TG-Verifier Task</h2><br>
+    </head>
+    <body>
+        {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+            <form action="{{ url_for('edit_tg_v_task') }}" method=post>
+                <table style="width:30%">
+                    <tr>
+                        <td>Task Unique ID:</td>
+                        <td><input type=text name=tg_v_enrollment_id value={{ task[0]['tg_v_enrollment_id'] }} readonly></td>
+                    </tr>
+                    <tr>
+                        <td>Task Enrollment Date:</td>
+                        <td><input type=text name=tg_v_enrollment_date value='{{ task[0]['tg_v_enrollment_date']|safe }}' readonly></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type=hidden name=tg_v_eut_id value='{{ task[0]['tg_v_eut_id'] }}' readonly></td>
+                    </tr>
+                    <tr>
+                        <td>TG-A Host:</td>
+                        <td><input type=text name=tg_v_host value='{{ task[0]['tg_v_host'] }}' readonly></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type=hidden name=tg_v_host_id value='{{ task[0]['tg_v_host_id'] }}' readonly></td>
+                    </tr>
+                    <tr>
+                        <td>Source IP:</td>
+                        <td><input type=text name=tg_v_src_ip value='{{ task[0]['tg_v_src_ip'] }}'></td>
+                    </tr>
+                    <tr>
+                        <td>Entity Under Test:</td>
+                        <td><input type=text name=tg_v_eut value='{{ task[0]['tg_v_eut'] }}' readonly></td>
+                    </tr>
+                    <tr>
+                        <td>Destination IP:</td>
+                        <td><input type=text name=tg_v_dst_ip value='{{ task[0]['tg_v_dst_ip'] }}' readonly></td>
+                    </tr>
+                    <tr>
+                        <td><label for="vector">Attack Vector:</label></td>
+                        <td><select name="tg_v_dst_proto" id="tg_v_dst_proto" value='{{ task[0]['tg_v_dst_proto'] }}' required>
+                            <option selected value='{{ task[0]['tg_v_dst_proto'] }}'>{{ task[0]['tg_v_dst_proto'] }}</option>
+                            {% if tg_v_protos | length > 0 %}
+                              {% for tg_v_proto in tg_v_protos %}
+                                <option value = {{ tg_v_proto }}>{{ tg_v_proto }} </option>
+                              }
+                            {% endfor %}
+                            {% endif %}
+                        <dd></select></td>
+                    </tr>
+                    <tr>
+                        <td>PPS Rate:</td>
+                        <td><input type=number min='1' max='100' name=tg_v_pps value={{ task[0]['tg_v_pps'] }} required> packets per second</td>
+                    </tr>
+                    <tr>
+                        <td>Duration:</td>
+                        <td><input type=number min='1' max='60' name=tg_v_dur value={{ task[0]['tg_v_dur'] }} required> seconds</td>
+                    </tr>
+                    <tr>
+                        <!-- <td>Packet Count:           <td><input type=text name=tg_v_p_cnt value={{ task[0]['tg_v_p_cnt'] }}> -->
+                        <!-- <td>Packet Interval:        <td><input type=text name=tg_v_p_int value={{ task[0]['tg_v_p_int'] }}> -->
+                        <td>Description:</td>
+                        <td><input type=text name=tg_v_description value='{{ task[0]['tg_v_description'] }}'></td>
+                    </tr>
+                    <tr>
+                        <td><label for="status">Status:</label></td>
+                        <td><select name="tg_v_status" id="tg_v_status" value='{{ task[0]['tg_v_status'] }}' required>
+                            <option selected value='{{ task[0]['tg_v_status'] }}'>{{ task[0]['tg_v_status'] }}</option>
+                            <option value="A">Active</option>
+                            <option value="D">Disabled</option>
+                          <dd></select></td>
+                    </tr>
+                </table>
+                <br><td><input type=submit value=submit></td><br>
+            </form>
+    <div class=dfdata>
+        {{ data|safe }}
+    </div>
+    {% endif %}
+    {% endblock %}
+    </body>
+</html>

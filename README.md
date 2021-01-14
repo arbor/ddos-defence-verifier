@@ -77,7 +77,7 @@ DDV Traffic Generator (DDV-TG-x) Setup Steps:
 
 DDV-Console Setup Steps:
 1. Clone the git repository to your desired location, which will be the main GUI, or Console (DDV-C):
- - git clone https://git.arbor.net/mcampbell/ddos-defence-verifier-ddv.git
+ - git clone https://github.com/markcampbellza/ddos-defence-verifier.git
 
 2. Change to the directory containing the main python script, ddv-c.py, and run it:
  - $ python3 ddv-c.py 
@@ -94,10 +94,7 @@ DDV-Console Setup Steps:
     -  * Debugger PIN: 272-128-100
 
 - If you are getting a whole lot of errors for required python packages, ensure you have these installed:
-    - sudo pip install flask (or apt-get install python-flask)
-    - sudo pip install pandas (or apt-get install python-pandas)
-    - sudo pip install requests (or apt-get install python-requests)
-    - sudo pip install pyopenssl
+    - sudo pip3 install -r requirements.txt
 
 3. Login to the DDV-C GUI:
 - https://127.0.0.1:2020

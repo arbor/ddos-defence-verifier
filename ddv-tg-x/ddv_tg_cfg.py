@@ -1,5 +1,5 @@
 my_ip = '0.0.0.0' # Listening Local IP for DDV-TG-x. Modify manually on each TG Agent
-ddv_c_ip = '41.193.193.69' # Autodetected DDV console server IP (Specify the real IP if your DDV Console Server)
+ddv_c_ip = '255.255.255.255' # Autodetected DDV console server IP (Specify the real IP if your DDV Console Server)
 ddv_tg_v_port = 1980 # TCP listener port for Verrifier Traffic Generator
 ddv_tg_a_port = 1981 # TCP listener port for Attacker Traffic Generator
 ddv_v_enrollment_filename = 'ddv_tg_v_enrollment.csv' # Verifier enrollment data

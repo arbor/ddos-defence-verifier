@@ -54,17 +54,20 @@ DDV Traffic Generator (DDV-TG-x) Setup Steps:
  - ddv-tg-x/ddv_tg_x_scapy.py
 
 - To run the DDV-TG as an Attacker, select the A role
- - $ sudo python ddv-tg-x.py -r A
+.. code:: bash
+$ sudo python ddv-tg-x.py -r A
 
 - To run the DDV-TG as a Verifier, select the V role
- - $ sudo python ddv-tg-x.py -r V
+.. code:: bash
+$ sudo python ddv-tg-x.py -r V
 
 * ddv-tg-x.py must be run as root, this is to allow the generation of packets
 
 - To ensure these scripts keep running in the background, even when you disconnect from the terminal:
- - sudo nohup python ddv-tg-x.py -r A &
-
- - sudo nohup python ddv-tg-x.py -r V &
+.. code:: bash
+sudo nohup python ddv-tg-x.py -r A &
+.. code:: bash
+sudo nohup python ddv-tg-x.py -r V &
 
 - If you are getting a whole lot of errors for required python packages, ensure you have these installed:
     - sudo pip install flask (or apt-get install python-flask)

@@ -2409,6 +2409,10 @@ def ddv_hierarchy_search(dict_input, dict_key): # ddv_nodes list/dict and key to
 def ddv_hierarchy():
     out_entries = get_out()
     eut_entries = get_eut()
+    if eut_entries.index.values[0] == 'error':
+        return 'error'
+    else:
+        pass
     agent_entries = get_agents()
     tg_a_task_entries = get_tg_a_tasks()
     tg_v_task_entries = get_tg_v_tasks()
@@ -2797,6 +2801,10 @@ def ddv_hierarchy_draw_network():
 @app.route('/draw_out')
 def ddv_hierarchy_draw_out_sankey():
     graph_data = ddv_hierarchy()
+    if graph_data == 'error':
+        return redirect(url_for('enroll_eut'))
+    else:
+        pass
     draw_sankey(graph_data)
     draw_network(graph_data)
     return redirect(url_for('out_status'))

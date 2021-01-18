@@ -1848,8 +1848,11 @@ def delete_eut():
         except:
             pass
     if request.method == 'POST':
-        uuid = int(request.form['eut_shortname']) # Get uuid of EUT from form POST
-        delete_eut_entry(uuid)
+        try:
+            uuid = int(request.form['eut_shortname']) # Get uuid of EUT from form POST
+            delete_eut_entry(uuid)
+        except:
+            return redirect(url_for('enroll_eut'))
     eut_entries = get_eut()
     eut_names = eut_entries.reset_index().to_dict('records')
     return render_template('delete_eut.html', error=error, eut_names=eut_names, data=eut_entries.to_html())

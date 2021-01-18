@@ -55,8 +55,9 @@ DDV Traffic Generator (DDV-TG-x) Setup Steps:
 
 - To run the DDV-TG as an Attacker, select the A role
 
-.. code:: bash
+```bash
     sudo python ddv-tg-x.py -r A
+```
 
 - To run the DDV-TG as a Verifier, select the V role
 

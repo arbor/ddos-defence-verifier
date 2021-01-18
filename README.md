@@ -60,15 +60,18 @@ python3 ddv-c.py
 ```
 
 - You should see an output similar to the following:
-    -  * Serving Flask app "ddv-c" (lazy loading)
-    -  * Environment: production
-    -    WARNING: This is a development server. Do not use it in a production deployment.
-    -    Use a production WSGI server instead.
-    -  * Debug mode: on
-    -  * Running on https://0.0.0.0:2020/ (Press CTRL+C to quit)
-    -  * Restarting with stat
-    -  * Debugger is active!
-    -  * Debugger PIN: 272-128-100
+
+```
+    * Serving Flask app "ddv-c" (lazy loading)
+    * Environment: production
+       WARNING: This is a development server. Do not use it in a production deployment.
+       Use a production WSGI server instead.
+    * Debug mode: on
+    * Running on https://0.0.0.0:2020/ (Press CTRL+C to quit)
+    * Restarting with stat
+    * Debugger is active!
+    * Debugger PIN: 272-128-100
+```
 
 - If you are getting a whole lot of errors for required python packages, ensure you have these installed:
 ```bash

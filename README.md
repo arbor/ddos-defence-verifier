@@ -48,45 +48,16 @@ Sightline Configuration using REST API:
 
 
 
-DDV Traffic Generator (DDV-TG-x) Setup Steps:
-1. Copy the following files to any appropriate directory on your DDV-TG (linux VPS host)
- - ddv-tg-x/ddv-tg-x.py
- - ddv-tg-x/ddv_tg_x_scapy.py
-
-- To run the DDV-TG as an Attacker, select the A role
-
-```bash
-    sudo python ddv-tg-x.py -r A
-```
-
-- To run the DDV-TG as a Verifier, select the V role
-
-.. code:: bash
-    sudo python ddv-tg-x.py -r V
-
-* ddv-tg-x.py must be run as root, this is to allow the generation of packets
-
-- To ensure these scripts keep running in the background, even when you disconnect from the terminal:
-.. code:: bash
-sudo nohup python ddv-tg-x.py -r A &
-.. code:: bash
-sudo nohup python ddv-tg-x.py -r V &
-
-- If you are getting a whole lot of errors for required python packages, ensure you have these installed:
-    - sudo pip install flask (or apt-get install python-flask)
-    - sudo pip install pandas (or apt-get install python-pandas)
-    - sudo pip install requests (or apt-get install python-requests)
-    - sudo pip install pyopenssl
-    - sudo pip install --pre scapy[basic]
-
-
-
 DDV-Console Setup Steps:
 1. Clone the git repository to your desired location, which will be the main GUI, or Console (DDV-C):
- - git clone https://github.com/markcampbellza/ddos-defence-verifier.git
+```bash
+git clone https://github.com/markcampbellza/ddos-defence-verifier.git
+ ```
 
 2. Change to the directory containing the main python script, ddv-c.py, and run it:
- - $ python3 ddv-c.py 
+```bash
+python3 ddv-c.py 
+```
 
 - You should see an output similar to the following:
     -  * Serving Flask app "ddv-c" (lazy loading)
@@ -100,10 +71,14 @@ DDV-Console Setup Steps:
     -  * Debugger PIN: 272-128-100
 
 - If you are getting a whole lot of errors for required python packages, ensure you have these installed:
-    - sudo pip3 install -r requirements.txt
+```bash
+sudo pip3 install -r requirements.txt
+```
 
 3. Login to the DDV-C GUI:
-- https://127.0.0.1:2020
+```
+https://127.0.0.1:2020
+```
 - default username/password: admin/ddv
 
 4. Configuration Steps on the DDV-C GUI:
@@ -131,3 +106,42 @@ DDV-Console Setup Steps:
     - OuT > Status
  - Run complete set of tests to verify your Sightline+TMS DDoS deployment
     - OuT > Run
+    
+    
+  
+    
+Non-VPS DDV Traffic Generator (DDV-TG-x) Setup Steps:
+1. Copy the following files to any appropriate directory on your DDV-TG (linux VPS host)
+ - ddv-tg-x/ddv-tg-x.py
+ - ddv-tg-x/ddv_tg_x_scapy.py
+
+- To run the DDV-TG as an Attacker, select the A role
+
+```bash
+sudo python ddv-tg-x.py -r A
+```
+
+- To run the DDV-TG as a Verifier, select the V role
+
+```bash
+sudo python ddv-tg-x.py -r V
+```
+
+* ddv-tg-x.py must be run as root, this is to allow the generation of packets
+
+- To ensure these scripts keep running in the background, even when you disconnect from the terminal:
+```bash
+sudo nohup python ddv-tg-x.py -r A &
+```
+```bash
+sudo nohup python ddv-tg-x.py -r V &
+```
+
+- If you are getting a whole lot of errors for required python packages, ensure you have these installed:
+```bash
+sudo pip install flask (or apt-get install python-flask)
+sudo pip install pandas (or apt-get install python-pandas)
+sudo pip install requests (or apt-get install python-requests)
+sudo pip install pyopenssl
+sudo pip install --pre scapy[basic]
+```

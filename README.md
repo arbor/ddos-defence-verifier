@@ -1,7 +1,7 @@
-**DDoS Defence Verifier Tool for Arbor Sightline/TMS and MSSPs**
+# DDoS Defence Verifier Tool for Arbor Sightline/TMS and MSSPs
 (aka DDV)
 
-Benefits to using DDV:
+## Benefits to using DDV:
 1. A consolidated testing platform for individual or multiple Sightline Deployments
 2. Routine fire-drills conducted at the click of a button
     - Verify that the Entity under Test (Webserver, DNS server, etc) is responding as expected
@@ -17,7 +17,7 @@ Benefits to using DDV:
         - Diversion/ReInjection issues
 
 
-DDV Method of Operation:
+## DDV Method of Operation:
  - The tool basically lets you create frequent and automated “fire drills”  
  - You define:
      - Organisation (company) under test (OuT)
@@ -34,7 +34,7 @@ DDV Method of Operation:
         - while legitimate traffic is allowed to pass as expected (success rate)
 
 
-Sightline Configuration using REST API:
+## Sightline Configuration using REST API:
  - DDV-C creates the following “test infrastructure” on the Sightline Leader:
     - DDV Managed Objects (MOs) – to match the EuT IPs
     - Shared Host Detection Settings (SHDS) for DDV MOs, so they will predictably trigger DoS alerts with small amount of attack pps rates from Traffic Generator (TG)
@@ -48,7 +48,7 @@ Sightline Configuration using REST API:
 
 
 
-DDV-Console Setup Steps:
+## DDV-Console Setup Steps:
 1. Clone the git repository to your desired location, which will be the main GUI, or Console (DDV-C):
 ```bash
 git clone https://github.com/markcampbellza/ddos-defence-verifier.git
@@ -82,7 +82,7 @@ sudo pip3 install -r requirements.txt
 ```
 https://127.0.0.1:2020
 ```
-- default username/password: admin/ddv
+default username/password: admin/ddv
 
 4. Configuration Steps on the DDV-C GUI:
  - Define Traffic Generator Agents (TG Attacker or Verifier)
@@ -113,11 +113,13 @@ https://127.0.0.1:2020
     
   
     
-Non-VPS DDV Traffic Generator (DDV-TG-x) Setup Steps:
+## Non-VPS DDV Traffic Generator (DDV-TG-x) Setup Steps:
 1. Copy the following files to any appropriate directory on your DDV-TG (linux VPS host)
+ - ddv-tg-x/ddv_tg_cfg.py
  - ddv-tg-x/ddv-tg-x.py
  - ddv-tg-x/ddv_tg_x_scapy.py
-
+ - ddv-tg-x/requirements.txt
+ 
 - To run the DDV-TG as an Attacker, select the A role
 
 ```bash
@@ -147,4 +149,8 @@ sudo pip install pandas (or apt-get install python-pandas)
 sudo pip install requests (or apt-get install python-requests)
 sudo pip install pyopenssl
 sudo pip install --pre scapy[basic]
+```
+or simply run:
+```bash
+sudo pip3 install -r requirements.txt
 ```

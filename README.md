@@ -51,7 +51,7 @@
 ## DDV-Console Setup Steps:
 1. Clone the git repository to your desired location, which will be the main GUI, or Console (DDV-C):
 ```bash
-git clone https://github.com/markcampbellza/ddos-defence-verifier.git
+git clone https://github.com/arbor/ddos-defence-verifier.git
  ```
 
 2. Change to the directory containing the main python script, ddv-c.py, and run it:
